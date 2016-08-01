@@ -15,8 +15,14 @@ It will be comprised of the following parts:
   To be defined how to best handle file renames.
 * A workspace is defined by a configuration file, also writable by the ```wsp``` tool.
 * All files are pushed back into the store when done, with another ```wsp``` subcommand.
+* Different filenames and relative directory structure for each workspace are remembered.
 * [lowprio] Hooks to invoke VCS commands (for example.)
 * [lowprio] Apply some rules to create the workspace directory structure.
-* [lowprio] Different filenames and relative directory structure for each workspace are remembered.
 
-To be defined: what backing storage to use for the metadata repository. Is a hierharchical key-value enough? Is SQL needed?
+## Metadata Storage
+
+Line based text file so that changes can be easily tracked with a VCS. One metadata file for each object store subdirectory.
+
+Format should be something similar to YAML but simpler. Can be hand-made and should have very simple escaping rules.
+
+Some binary indices to speed up lookups can be implemented as hidden files. Indices mtime must be checked against the text mtime before usage and rebuild if necessary.
